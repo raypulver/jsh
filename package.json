@@ -1,0 +1,27 @@
+{
+  "name": "jsh",
+  "version": "0.0.2",
+  "description": "The extensible, pure-JS shell interpreter.",
+  "main": "index.js",
+  "bin": {
+    "jsh": "./bin/jsh"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raypulver/jsh"
+  },
+  "keywords": [
+    "jsh",
+    "sh",
+    "shell"
+  ],
+  "author": "Raymond Pulver IV & Hassan McKusick",
+  "license": "Private",
+  "bugs": {
+    "url": "https://github.com/raypulver/jsh/issues"
+  },
+  "homepage": "https://github.com/raypulver/jsh"
+}
