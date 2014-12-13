@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/raypulver/jsh/issues"
   },
-  "homepage": "https://github.com/raypulver/jsh"
+  "homepage": "https://github.com/raypulver/jsh",
+  "dependencies": {
+    "waitpid": "^0.1.1"
+  }
 }

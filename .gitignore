@@ -12,6 +12,3 @@ build/Release
 
 # Dependency dir
 node_modules
-
-# Binary dir
-bin
