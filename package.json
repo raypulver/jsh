@@ -6,8 +6,12 @@
   "bin": {
     "jsh": "./bin/jsh"
   },
+  "config": {
+    "unsafe-perm": true
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "install": "node-gyp rebuild"
   },
   "repository": {
     "type": "git",
@@ -23,8 +27,5 @@
   "bugs": {
     "url": "https://github.com/raypulver/jsh/issues"
   },
-  "homepage": "https://github.com/raypulver/jsh",
-  "dependencies": {
-    "waitpid": "^0.1.1"
-  }
+  "homepage": "https://github.com/raypulver/jsh"
 }
