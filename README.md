@@ -25,3 +25,11 @@ $ moveOut('file')
 ```
 
 jsh comes with full tab-completion, and you can preload JavaScript in your jsh environment by adding it to your .jshrc, in your home folder. jsh will automatically create this file the first time it is run.
+
+## Installation
+jsh is not yet on NPM, but you can install it with
+```
+$ git clone https://github.com/raypulver/jsh
+$ cd jsh
+$ npm install -g
+```
