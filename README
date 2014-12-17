@@ -1,0 +1,14 @@
+jsh - The JavaScript Shell
+This is a command-line interpreter which sits on top of both Node.js and sh, allowing you to simultaneously execute JavaScript and shell commands. It is fully compatible with Node modules, and preloads all the built-in Node modules at initialization.
+
+In shell commands, you can use the $ character to substitute a variable from the JavaScript environment.
+
+Example:
+
+$ var p = './dir';
+$ if (fs.existsSync(p))
+.. fs.readdirSync(p).forEach(function (v) {
+.... echo $v
+.... });
+
+This will echo the filenames of all the files in ./dir
