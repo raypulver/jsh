@@ -1,16 +1,12 @@
 {
   "name": "jsh",
-  "version": "0.1.0",
-  "description": "The extensible, pure-JS shell interpreter.",
+  "version": "0.1.1",
+  "description": "The JavaScript/shell interpreter.",
   "main": "index.js",
   "bin": {
     "jsh": "./bin/jsh"
   },
-  "config": {
-    "unsafe-perm": true
-  },
   "scripts": {
-    "test": "mocha",
     "install": "node-gyp rebuild"
   },
   "repository": {
@@ -23,7 +19,7 @@
     "shell"
   ],
   "author": "Raymond Pulver IV & Hassan McKusick",
-  "license": "Private",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/raypulver/jsh/issues"
   },
