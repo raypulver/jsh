@@ -1,5 +1,5 @@
 # jsh - The JavaScript Shell
-This is a UNIX command-line interpreter which sits on top of both Node.js and sh, allowing you to simultaneously execute JavaScript and shell commands. It is fully compatible with Node modules, and preloads all the built-in Node modules at initialization.
+This is a UNIX command-line interpreter which sits on top of both Node.js and sh, allowing you to simultaneously execute JavaScript and shell commands. It is fully compatible with Node modules, and preloads all the built-in Node modules at initialization, as well as any modules in ~/.jsh/node_modules, automatically converting to camel-case where necessary.
 
 In shell commands, you can use the $ character to substitute a variable from the JavaScript environment.
 
