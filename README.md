@@ -51,6 +51,7 @@ You can write jsh scripts by starting a script with ```#!/usr/local/bin/jsh```. 
 4. Ability to cycle through possible completions
 5. Variable evaluation during tab completion
 6. --coffee flag for CoffeeScript mode
+7. Backtick substitution, e.g. var files = `ls`.split('\n')
 
 ### Known Bugs
 
