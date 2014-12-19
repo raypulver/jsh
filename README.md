@@ -43,4 +43,4 @@ jsh comes with full tab-completion, and you can preload JavaScript in your jsh e
 
 jsh now works properly as a default shell in tmux (thanks nicm)
 
-When jsh is used as a default shell, the VIM plugin Syntastic will report that your default shell does not support redirection (when in fact redirection does work properly). Any hint as to why this is would be greatly appreciated.
+No other known bugs. Feel free to report them.
