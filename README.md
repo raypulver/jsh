@@ -1,5 +1,5 @@
 # jsh - The JavaScript Shell
-jsh is a UNIX command-line shell which sits on top of both Node.js and sh, allowing you to simultaneously execute JavaScript and shell commands. It is fully compatible with Node modules, and preloads all the built-in Node modules at initialization, as well as any modules in ~/.jsh/node_modules, automatically converting to camel-case where necessary.
+jsh is a UNIX command-line shell which sits on top of both Node.js and sh, allowing you to simultaneously execute JavaScript and shell commands. It is fully compatible with Node modules, and preloads all the built-in Node modules at initialization (just like in the Node REPL), as well as any modules in ~/.jsh/node_modules, automatically converting to camel-case where necessary.
 
 In shell commands, you can use the $ character to substitute a variable from the JavaScript environment. Alternatively you can surround any JavaScript expression in brackets and precede it with a $ character to perform substitutions. Use brackets whenever your JavaScript expression contains a non-word character, like a . or " character.
 
@@ -39,8 +39,19 @@ $ function removetxt (v) {
 
 jsh comes with full tab-completion, and you can preload JavaScript in your jsh environment by adding it to your .jshrc, in your home folder. jsh will automatically create this file the first time it is run.
 
+You can write jsh scripts by starting a script with ```#!/usr/local/bin/jsh```. The .jshrc file is still executed by the VM prior to script execution, and remember that all the built-in node modules are already loaded in the environment!
+
+## Coming soon (in no particular order)
+
+1. Fully customizable key bindings (which stay in effect in programs launched by jsh)
+2. An "include" command
+3. JavaScript tab completion
+4. Ability to cycle through possible completions
+5. Variable evaluation during tab completion
+6. --coffee flag for CoffeeScript mode
+
 ### Known Bugs
 
-jsh now works properly as a default shell in tmux (thanks nicm)
+jsh now works properly in tmux (thanks nicm)
 
-No other known bugs. Feel free to report any you find.
+No other known bugs. jsh is still in infancy so please report any bugs you find, either here or to me personally. Reach out to me for any reason on Freenode IRC, @raypulver (I'm always on).
