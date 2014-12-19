@@ -40,8 +40,7 @@ $ function removetxt (v) {
 jsh comes with full tab-completion, and you can preload JavaScript in your jsh environment by adding it to your .jshrc, in your home folder. jsh will automatically create this file the first time it is run.
 
 ### Known Bugs
-jsh does not work well as a default shell for tmux. When an external command is executed, jsh uses a C++ addon (which calls waitpid) to block the current process until the child process finishes executing. When tmux changes panes, for some reason jsh thinks that the child process has quit, and it returns to the shell without killing the actual process. When using programs like ssh or irssi on top of jsh in tmux, this makes the pane unusable and you have to :kill-pane to close it. I would be grateful for any suggestions as to how to fix this.
+
+jsh now works properly as a default shell in tmux (thanks nicm)
 
 When jsh is used as a default shell, the VIM plugin Syntastic will report that your default shell does not support redirection (when in fact redirection does work properly). Any hint as to why this is would be greatly appreciated.
-
-At this stage, jsh is very suitable as a secondary shell.

@@ -1,7 +1,7 @@
 {
   "name": "jsh",
-  "version": "0.1.12",
-  "description": "The JavaScript/shell interpreter.",
+  "version": "0.1.13",
+  "description": "The JavaScript shell interpreter.",
   "main": "index.js",
   "bin": {
     "jsh": "./bin/jsh"

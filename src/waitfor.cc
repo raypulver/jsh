@@ -15,7 +15,12 @@ static Handle<Value> Waitfor(const Arguments& args) {
   if (args[0]->IsInt32()) {
     child = args[0]->Int32Value();
 
-    waitpid(child, &status, 0);
+    while (waitpid(child, &status, 0) == -1) {
+      if (errno != EINTR) {
+        perror("waitpid");
+        exit(1);
+      }
+    }
 
     Local<Object> result = Object::New();
 
