@@ -1,7 +1,7 @@
 # jsh - The JavaScript Shell
 jsh is a UNIX command-line shell which sits on top of both Node.js and sh, allowing you to simultaneously execute JavaScript and shell commands. It is fully compatible with Node modules, and preloads all the built-in Node modules at initialization, as well as any modules in ~/.jsh/node_modules, automatically converting to camel-case where necessary.
 
-In shell commands, you can use the $ character to substitute a variable from the JavaScript environment. Alternatively you can surround any JavaScript expression in brackets and precede it with a $ character to perform substitutions. Use brackets whenever your JavaScript expression contains a non-word character, like a "." character.
+In shell commands, you can use the $ character to substitute a variable from the JavaScript environment. Alternatively you can surround any JavaScript expression in brackets and precede it with a $ character to perform substitutions. Use brackets whenever your JavaScript expression contains a non-word character, like a . or " character.
 
 ## Installation:
 
