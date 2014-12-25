@@ -9,7 +9,8 @@ var sandbox = {
     'b}': 5,
   },
   PATH: process.env.PATH,
-  HOME: process.env.HOME
+  HOME: process.env.HOME,
+  cmds: {}
 }, context = vm.createContext(sandbox);
 
 F.prototype = {
@@ -32,7 +33,8 @@ var toCamelCase = require('../lib/util/to-camel-case'),
     extractJs = require('../lib/util/extract-js'),
     extractPureJs = require('../lib/util/extract-pure-js'),
     firstWord = require('../lib/util/first-word'),
-    substituteTilde = require('../lib/util/substitute-tilde')(context);
+    substituteTilde = require('../lib/util/substitute-tilde')(context),
+    sandr = require('../lib/util/sandr')(context),
     allKeysStartingWith = require('../lib/util/all-keys-starting-with');
 
 describe('jsh utility modules', function () {
@@ -46,6 +48,9 @@ describe('jsh utility modules', function () {
   it('should add newlines after semicolons and preserve strings', function () {
     expect(addNewlines('console.log(\'{a:1}\');')).to.equal('console.log(\'{a:1}\');\n');
   });
+  it('should add newlines without mangling bracketed expressions', function () {
+    expect(addNewlines('execSync(\'echo ${util.format(\\\'%s\\\', HOME)}\');')).to.equal('execSync(\'echo ${util.format(\\\'%s\\\', HOME)}\');\n');
+  });
   it('should substitute variables', function () {
     expect(substituteVars('execSync(\'rm $HOME\');')).to.equal('execSync(\'rm \' + HOME + \'\');');
   });
@@ -54,6 +59,7 @@ describe('jsh utility modules', function () {
   });
   it('should substitute expressions', function () {
     expect(substituteVars('execSync(\'rm ${HOME + \\\'woop\\\'}\');')).to.equal('execSync(\'rm \' + HOME + \'woop\' + \'\');');
+    expect(substituteVars('execSync(\'echo ${util.format(\\\'%s\\\', HOME)}\');')).to.equal('execSync(\'echo \' + util.format(\'%s\', HOME) + \'\');');
   });
   it('should escape spaces', function () {
     expect(escapeSpaces('vim file')).to.equal('vim\\ file');
@@ -82,6 +88,14 @@ describe('jsh utility modules', function () {
     expect(inJavaScript('mv foo')).to.equal(false);
   });
 });
+describe('command rewriter', function () {
+  it('should not add newlines to single-line commands', function () {
+    expect(addNewlines('echo ${util.format(\'%s\', HOME)}')).to.equal('echo ${util.format(\'%s\', HOME)}');
+  });
+  it('should rewrite commands correctly', function () {
+    expect(sandr('echo ${util.format(\'%s\', HOME)}')).to.equal('execSync(\'echo \' + util.format(\'%s\', HOME) + \'\');');
+  });
+});
 describe('unescape and quoting module', function () {
   it('should unescape and quote commands', function () {
     expect(unescapeAndQuote('mv Multiple\\ Words Somewhere\\ Else')).to.equal('mv "Multiple Words" "Somewhere Else"');
@@ -102,6 +116,12 @@ describe('js extraction module', function () {
     expect(extracted.lastPath).to.equal('fs');
     expect(extracted.last).to.equal('');
     expect(extracted.rest).to.equal('mv ${');
+  });
+  it('should extract a function call into parts', function () {
+    var extracted = extractJs('echo ${util.format(\'%s\', H');
+    expect(extracted.lastPath).to.equal('');
+    expect(extracted.last).to.equal('H');
+    expect(extracted.rest).to.equal('echo ${util.format(\'%s\', ');
   });
   it('should extract pure js into parts', function () {
     var extracted = extractPureJs('fs.readdirSync');
