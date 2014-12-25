@@ -49,7 +49,7 @@ You can write jsh scripts by starting a script with ```#!/usr/local/bin/jsh```. 
 2. An "include" command
 3. Ability to cycle through possible completions
 4. --coffee flag for CoffeeScript mode
-5. Backtick substitution, e.g. var files = `ls`.split('\n')
+5. Backtick substitution, e.g. var files = \`ls\`.split('\n')
 
 ### Known Bugs
 
