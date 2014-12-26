@@ -45,11 +45,10 @@ You can write jsh scripts by starting a script with ```#!/usr/local/bin/jsh```. 
 
 ## Coming soon (in no particular order)
 
-1. Fully customizable key bindings (which stay in effect in programs launched by jsh)
-2. An "include" command
-3. Ability to cycle through possible completions
-4. --coffee flag for CoffeeScript mode
-5. Backtick substitution, e.g. var files = \`ls\`.split('\n')
+1. An "include" command
+2. Ability to cycle through possible completions
+3. --coffee flag for CoffeeScript mode
+4. Backtick substitution, e.g. var files = \`ls\`.split('\n')
 
 ### Known Bugs
 
