@@ -15,7 +15,8 @@ var sandbox = {
 
 sandbox.cmds.alias = function () {};
 sandbox.cmds.alias.aliases = {
-  ls: 'ls --color=auto'
+  ls: 'ls --color=auto',
+  lsa: 'ls -a'
 };
 
 F.prototype = {
@@ -32,6 +33,7 @@ var toCamelCase = require('../lib/util/to-camel-case'),
     substituteVarsWithContext = require('../lib/util/substitute-vars-with-context')(context),
     addNewlines = require('../lib/util/add-newlines'),
     escapeSpaces = require('../lib/util/escape-spaces'),
+    stripSemicolon = require('../lib/util/strip-semicolon'),
     breakUpCommand = require('../lib/util/break-up-command'),
     unescapeAndQuote = require('../lib/util/unescape-and-quote'),
     inJavaScript = require('../lib/util/in-javascript'),
@@ -93,6 +95,10 @@ describe('jsh utility modules', function () {
   it('should know when the current line is in a shell command', function () {
     expect(inJavaScript('mv foo')).to.equal(false);
   });
+  it('should strip semicolons', function () {
+    expect(stripSemicolon('lsa;')).to.equal('lsa');
+    expect(stripSemicolon('ls')).to.equal('ls');
+  });
 });
 describe('command rewriter', function () {
   it('should not add newlines to single-line commands', function () {
@@ -106,6 +112,8 @@ describe('command rewriter', function () {
   });
   it('should substitute aliases', function () {
     expect(substituteAliases('ls')).to.equal('ls --color=auto');
+    expect(substituteAliases('lsa')).to.equal('ls -a');
+    expect(substituteAliases('ls;')).to.equal('ls --color=auto;');
   });
 });
 describe('unescape and quoting module', function () {
