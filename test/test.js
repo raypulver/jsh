@@ -16,7 +16,8 @@ var sandbox = {
 sandbox.cmds.alias = function () {};
 sandbox.cmds.alias.aliases = {
   ls: 'ls --color=auto',
-  lsa: 'ls -a'
+  lsa: 'ls -a',
+  ll: 'ls -l'
 };
 
 F.prototype = {
@@ -114,6 +115,8 @@ describe('command rewriter', function () {
     expect(substituteAliases('ls')).to.equal('ls --color=auto');
     expect(substituteAliases('lsa')).to.equal('ls -a');
     expect(substituteAliases('ls;')).to.equal('ls --color=auto;');
+    expect(substituteAliases('npm install -g')).to.equal('npm install -g');
+    expect(substituteAliases(' ll;')).to.equal(' ls -l;');
   });
 });
 describe('unescape and quoting module', function () {
