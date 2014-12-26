@@ -13,6 +13,11 @@ var sandbox = {
   cmds: {}
 }, context = vm.createContext(sandbox);
 
+sandbox.cmds.alias = function () {};
+sandbox.cmds.alias.aliases = {
+  ls: 'ls --color=auto'
+};
+
 F.prototype = {
   giraffe: 'woop',
   hungary: 'woop'
@@ -35,6 +40,7 @@ var toCamelCase = require('../lib/util/to-camel-case'),
     firstWord = require('../lib/util/first-word'),
     substituteTilde = require('../lib/util/substitute-tilde')(context),
     sandr = require('../lib/util/sandr')(context),
+    substituteAliases = require('../lib/util/substitute-aliases')(context),
     allKeysStartingWith = require('../lib/util/all-keys-starting-with');
 
 describe('jsh utility modules', function () {
@@ -94,6 +100,12 @@ describe('command rewriter', function () {
   });
   it('should rewrite commands correctly', function () {
     expect(sandr('echo ${util.format(\'%s\', HOME)}')).to.equal('execSync(\'echo \' + util.format(\'%s\', HOME) + \'\');');
+  });
+  it('should not mistake parentheses for an external command', function () {
+    expect(sandr(addNewlines('a.forEach(function (v) { console.log(v); })'))).to.equal('a.forEach(function (v) \n{\n console.log(v);\n \n}\n)');
+  });
+  it('should substitute aliases', function () {
+    expect(substituteAliases('ls')).to.equal('ls --color=auto');
   });
 });
 describe('unescape and quoting module', function () {
