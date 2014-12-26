@@ -39,16 +39,17 @@ $ function removetxt (v) {
 .. }
 ```
 
-jsh comes with full tab-completion, and you can preload JavaScript in your jsh environment by adding it to your .jshrc, in your home folder. jsh will automatically create this file the first time it is run.
+jsh comes with full tab-completion. You can press tab multiple times to cycle through possible completions, or use the up and down arrows to navigate the list.
+
+You can preload JavaScript in your jsh environment by adding it to your .jshrc, in your home folder. jsh will automatically create this file the first time it is run.
 
 You can write jsh scripts by starting a script with ```#!/usr/local/bin/jsh```. The .jshrc file is still executed by the VM prior to script execution, and remember that all the built-in node modules are already loaded in the environment!
 
 ## Coming soon (in no particular order)
 
 1. An "include" command
-2. Ability to cycle through possible completions
-3. --coffee flag for CoffeeScript mode
-4. Backtick substitution, e.g. var files = \`ls\`.split('\n')
+2. --coffee flag for CoffeeScript mode
+3. Backtick substitution, e.g. var files = \`ls\`.split('\n')
 
 ### Known Bugs
 
