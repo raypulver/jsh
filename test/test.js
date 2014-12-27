@@ -33,7 +33,7 @@ var toCamelCase = require('../lib/util/to-camel-case'),
     substituteVars = require('../lib/util/substitute-vars'),
     substituteVarsWithContext = require('../lib/util/substitute-vars-with-context')(context),
     addNewlines = require('../lib/util/add-newlines'),
-    escapeSpaces = require('../lib/util/escape-spaces'),
+    escapeShell = require('../lib/util/escape-shell'),
     stripSemicolon = require('../lib/util/strip-semicolon'),
     breakUpCommand = require('../lib/util/break-up-command'),
     unescapeAndQuote = require('../lib/util/unescape-and-quote'),
@@ -70,8 +70,9 @@ describe('jsh utility modules', function () {
     expect(substituteVars('execSync(\'rm ${HOME + \\\'woop\\\'}\');')).to.equal('execSync(\'rm \' + HOME + \'woop\' + \'\');');
     expect(substituteVars('execSync(\'echo ${util.format(\\\'%s\\\', HOME)}\');')).to.equal('execSync(\'echo \' + util.format(\'%s\', HOME) + \'\');');
   });
-  it('should escape spaces', function () {
-    expect(escapeSpaces('vim file')).to.equal('vim\\ file');
+  it('should escape shell commands', function () {
+    expect(escapeShell('vim file')).to.equal('vim\\ file');
+    expect(escapeShell('Edge of Tomorrow (2014) [1080p]/')).to.equal('Edge\\ of\\ Tomorrow\\ \\(2014\\)\\ \\[1080p\\]/')
   });
   it('should break up a command into parts', function () {
     var broken = breakUpCommand('mv /home/sal/Multiple\\ Words /home/sal/Other\\ Words');
