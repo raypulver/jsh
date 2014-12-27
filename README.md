@@ -41,7 +41,7 @@ $ function removetxt (v) {
 
 jsh comes with full tab-completion. You can press tab multiple times to cycle through possible completions, or use the up and down arrows to navigate the list.
 
-TIP: When cycling through directories, if you want to choose a directory and sstart autocompleting through that directory without typing a character, you can first press any sequence that does not print a character, such as CTRL-T, to reset the tab counter without printing a character. Then you can start pressing tab to cycle through subdirectories.
+TIP: When cycling through directories, if you want to choose a directory and sstart autocompleting through that directory without typing a character, you can first press any sequence that does not print a character, such as CTRL-T, to reset the tab counter. Then you can start pressing tab to cycle through subdirectories.
 
 You can preload JavaScript in your jsh environment by adding it to your .jshrc, in your home folder. jsh will automatically create this file the first time it is run.
 
