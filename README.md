@@ -49,6 +49,8 @@ You can preload JavaScript in your jsh environment by adding it to your .jshrc, 
 
 You can write jsh scripts by starting a script with ```#!/usr/local/bin/jsh```. The .jshrc file is still executed by the VM prior to script execution, and remember that all the built-in node modules are already loaded in the environment!
 
+When the shell is run interactively, the last returned value is stored in the _ variable, just like in the Node REPL.
+
 ## Coming soon (in no particular order)
 
 1. An "include" command
