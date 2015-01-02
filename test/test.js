@@ -118,6 +118,7 @@ describe('command rewriter', function () {
     expect(substituteAliases('ls;')).to.equal('ls --color=auto;');
     expect(substituteAliases('npm install -g')).to.equal('npm install -g');
     expect(substituteAliases(' ll;')).to.equal(' ls -l;');
+    expect(substituteAliases('tmux ls')).to.equal('tmux ls');
   });
 });
 describe('unescape and quoting module', function () {
