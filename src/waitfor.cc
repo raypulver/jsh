@@ -8,8 +8,9 @@
 using namespace v8;
 using namespace node;
 
-static Handle<Value> Waitfor(const Arguments& args) {
-  HandleScope scope;
+static void Waitfor(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
   int child, status;
 
   if (args[0]->IsInt32()) {
@@ -22,28 +23,32 @@ static Handle<Value> Waitfor(const Arguments& args) {
       }
     }
 
-    Local<Object> result = Object::New();
+    Local<Object> result = Object::New(isolate);
 
     if (WIFEXITED(status)) {
-      result->Set(String::New("exitCode"), Integer::New(WEXITSTATUS(status)));
-      result->Set(String::New("signalCode"), Null());
-      return scope.Close(result);
+      result->Set(String::NewFromUtf8(isolate, "exitCode"), Integer::New(isolate, WEXITSTATUS(status)));
+      result->Set(String::NewFromUtf8(isolate, "signalCode"), Null(isolate));
+      args.GetReturnValue().Set(result);
+      return;
     }
     else if (WIFSIGNALED(status)) {
-      result->Set(String::New("exitCode"), Null());
-      result->Set(String::New("signalCode"), Integer::New(WTERMSIG(status)));
-      return scope.Close(result);
+      result->Set(String::NewFromUtf8(isolate, "exitCode"), Null(isolate));
+      result->Set(String::NewFromUtf8(isolate, "signalCode"), Integer::New(isolate, WTERMSIG(status)));
+      args.GetReturnValue().Set(result);
+      return;
     }
-    return scope.Close(Undefined());
+    args.GetReturnValue().Set(Undefined(isolate));
+    return;
   }
   else {
-    return ThrowException(Exception::Error(String::New("Not an integer.")));
+    isolate->ThrowException(Exception::Error(String::NewFromUtf8(isolate, "Not an integer.")));
+    return;
   }
 }
 
 
 extern "C" void init(Handle<Object> target) {
-  HandleScope scope;
+  HandleScope scope(Isolate::GetCurrent());
   NODE_SET_METHOD(target, "waitfor", Waitfor);
 }
 
